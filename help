@@ -1,0 +1,23 @@
+Note:
+
+Include the pybind11 folder in the working directory before executing the commands
+
+Commands:
+
+g++ -o libtest.so test.cpp -std=c++11 -fPIC -shared -I/home/user2/Desktop/OpenFAM/include -L/home/user2/Desktop/OpenFAM/build/src -lopenfam
+
+g++ -O3 -Wall -shared -std=c++14 -fPIC -I/home/user2/Desktop/OpenFAM/include -L/home/user2/Desktop/OpenFAM/build/src -lopenfam $(python3 -m pybind11 --includes) -I. pybind11_wrapper.cpp -o example.so -L. -ltest -Wl,-rpath,/home/user2/Desktop/test/python -ltest
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/user2/Desktop/may/pybind11_bindings_ex
+
+python3 test.py
+
+
+
+
+
+
+
+
+
+
