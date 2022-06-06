@@ -30,15 +30,29 @@ print(d)
 
 
 
+print('FAM ADD')
 # FAM ADD DIRECT FROM FAM API _______________
 
-famObject.fam_add(d, 0, 6)
-famObject.fam_add(d, 0, 7)
+famObject.fam_add(d, 0, 6.7)
+famObject.fam_add(d, 0, 7.6)
 
-res = famObject.fam_fetch_int32(d, 0)
+res = famObject.fam_fetch_float(d, 0)
 print(res)
 
 #_____________________________________________
+
+
+print('FAM SUBTRACT')
+#FAM SUBTRACT_____________________________________________
+
+famObject.fam_subtract(d, 0, 6.8)
+famObject.fam_subtract(d, 0, 9.8)
+
+res = famObject.fam_fetch_float(d, 0)
+print(res)
+
+#______________________________________________
+
 
 ex.fam_destory_region(famObject, r)
 print("DESTROY REGION CALLED FROM WRAPPER")
