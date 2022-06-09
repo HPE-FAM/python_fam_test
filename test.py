@@ -54,15 +54,15 @@ print(res)
 #______________________________________________
 
 
-ex.fam_destory_region(famObject, r)
-print("DESTROY REGION CALLED FROM WRAPPER")
+#ex.fam_destory_region(famObject, r)
+#print("DESTROY REGION CALLED FROM WRAPPER")
 
 
 # Doesn't work for now - incompatible function arguments (error)____
-"""
-famObject.fam_destroy_region(d)
+
+famObject.fam_destroy_region(r)
 print("DESTROY REGION CALLED FROM FAM API")
-"""
+
 #____________________________________________________________________
 
 #famObject.fam_destory_region(r)

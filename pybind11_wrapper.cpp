@@ -25,7 +25,7 @@ PYBIND11_MODULE(example, m) {
 	.def("set_fam_options", &Test::set_fam_options, py::return_value_policy::move)
 	.def("fam_create_region",&Test::my_create_region)
 	.def("my_fam_allocate",&Test::my_fam_allocate)
-	.def("fam_destory_region",&Test::my_destory_region)
+	//.def("fam_destroy_region",&Test::my_destory_region)
 	//.def("myfam_finalize", &Test::fam_finalize_wrapper)
 	//.def("myadd",&Test::myadd)
         ;
@@ -61,7 +61,7 @@ PYBIND11_MODULE(example, m) {
 	.def("fam_fetch_uint64", &fam::fam_fetch_uint64)
 	.def("fam_fetch_float", &fam::fam_fetch_float)
 	.def("fam_fetch_double", &fam::fam_fetch_double)
-	//.def("fam_destroy_region", &fam::fam_destroy_region)
+	.def("fam_destroy_region", &fam::fam_destroy_region)
 	//.def("fam_create_region", &fam::fam_create_region)
 	//.def("fam_add", &fam::fam_add<Fam_Descriptor*, uint64_t , int32_t>())
 	//.def("fam_create_region", &fam::fam_create_region)
