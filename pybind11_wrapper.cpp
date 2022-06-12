@@ -62,6 +62,30 @@ PYBIND11_MODULE(example, m) {
 	.def("fam_fetch_float", &fam::fam_fetch_float)
 	.def("fam_fetch_double", &fam::fam_fetch_double)
 	.def("fam_destroy_region", &fam::fam_destroy_region)
+	.def("fam_max",py::overload_cast< Fam_Descriptor* , uint64_t , int32_t >(&fam::fam_max) , "max1")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_max) , "max2")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_max),"max3")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_max) , "max4")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_max) , "max5")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_max) , "max6")
+	.def("fam_and",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_and),"and1")
+	.def("fam_and",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_and) , "and2")
+	.def("fam_or",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_or),"or1")
+	.def("fam_or",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_or) , "or2")
+	.def("fam_xor",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_xor),"xor1")
+	.def("fam_xor",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_xor) , "xor2")
+	.def("fam_swap",py::overload_cast< Fam_Descriptor* , uint64_t , int32_t >(&fam::fam_swap) , "swap1")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_swap) , "swap2")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_swap),"swap3")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_swap) , "swap4")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_swap) , "swap5")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_swap) , "swap6")
+	.def("fam_compare_swap",py::overload_cast< Fam_Descriptor* , uint64_t , int32_t, int32_t >(&fam::fam_compare_swap) , "cmp1")
+	.def("fam_compare_swap",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t,int64_t >(&fam::fam_compare_swap) , "cmp2")
+	.def("fam_compare_swap",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t,uint32_t >(&fam::fam_compare_swap),"cmp3")
+	.def("fam_compare_swap",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t,uint64_t >(&fam::fam_compare_swap) , "cmp4")
+	.def("fam_compare_swap",py::overload_cast<Fam_Descriptor * , uint64_t , int128_t , int128_t>(&fam::fam_compare_swap) , "cmp5")
+
 	//.def("fam_create_region", &fam::fam_create_region)
 	//.def("fam_add", &fam::fam_add<Fam_Descriptor*, uint64_t , int32_t>())
 	//.def("fam_create_region", &fam::fam_create_region)
@@ -88,5 +112,3 @@ PYBIND11_MODULE(example, m) {
 
 
 }
-
-
