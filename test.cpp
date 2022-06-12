@@ -63,44 +63,4 @@ Fam_Descriptor *  Test::my_fam_allocate(fam * myFam,Fam_Region_Descriptor * regi
 		}
 		return descriptor; 
 }
-/*
-int Test::myadd(fam * myFam,Fam_Descriptor * d ,int x ,int y)
-{
-	myFam->fam_add(d, 0, x);
-	myFam->fam_add(d, 0, y);
-	int value = myFam->fam_fetch_int32(d, 0);
-	printf("result %d",value);
-	return value ;
-}
 
-void Test::my_destory_region(fam * myFam , Fam_Region_Descriptor * region)
-{
- try {
-
-        myFam->fam_destroy_region(region);
-    } catch (Fam_Exception &e) {
-        printf("Destroy region failed: %d: %s\n", e.fam_error(),
-               e.fam_error_msg());
-    }
-}
-
-
-void Test::fam_finalize_wrapper(fam *f, const char* groupName){
-	try {
-        f->fam_finalize("myApplication");
-        printf("FAM finalized\n");
-	} catch (Fam_Exception &e) {
-	printf("FAM Finalization failed: %s\n", e.fam_error_msg());
-	f->fam_abort(-1); 
-	}
-}
-
-
-// ________________________________________________________________________________________________________________
-
-
-// Not relevant --- runs only the example api
-//___________________________________________________________________
-
-
-*/
