@@ -35,18 +35,100 @@ PYBIND11_MODULE(example, m) {
 	.def("fam_abort", &fam::fam_abort)
 	.def("fam_initialize", &fam::fam_initialize)
 	.def("fam_finalize",&fam::fam_finalize)
-	.def("fam_add",py::overload_cast< Fam_Descriptor* , uint64_t , int32_t >(&fam::fam_add) , "add1")
+
+
+	//Gives error when called
+	.def("fam_and",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_and) , "and1")
+	.def("fam_and",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_and) , "and2")
+
+	.def("fam_fetch_and",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_fetch_and) , "fand1")
+	.def("fam_fetch_and",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_fetch_and) , "fand2")
+
+	.def("fam_or",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_or) , "or1")
+	.def("fam_or",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_or) , "or2")
+
+	.def("fam_fetch_or",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_fetch_or) , "for1")
+	.def("fam_fetch_or",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_fetch_or) , "for2")	
+
+	.def("fam_xor",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_xor) , "xor1")
+	.def("fam_xor",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_xor) , "xor2")
+
+	.def("fam_fetch_xor",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_fetch_xor) , "fxor1")
+	.def("fam_fetch_xor",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_fetch_xor) , "fxor2")
+
+	.def("fam_fence", &fam::fam_fence)
+	
+
+	// works
+	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , int32_t >(&fam::fam_add) , "add1")
 	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_add) , "add2")
-	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_add),"add3")
-	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_add) , "add4")
-	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_add) , "add5")
-	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_add) , "add6")
+	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_add), "add3")
+	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_add), "add4")
+	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_add), "add5")
+	.def("fam_add",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_add), "add6")
+
+	.def("fam_fetch_add",py::overload_cast<Fam_Descriptor * , uint64_t , int32_t >(&fam::fam_fetch_add) , "fadd1")
+	.def("fam_fetch_add",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_fetch_add) , "fadd2")
+	.def("fam_fetch_add",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_fetch_add), "fadd3")
+	.def("fam_fetch_add",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_fetch_add), "fadd4")
+	.def("fam_fetch_add",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_fetch_add), "fadd5")
+	.def("fam_fetch_add",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_fetch_add), "fadd6")
+
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , int32_t >(&fam::fam_max) , "max1")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_max) , "max2")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_max) , "max3")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_max) , "max4")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_max) , "max5")
+	.def("fam_max",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_max) , "max6")
+
+	.def("fam_fetch_max",py::overload_cast<Fam_Descriptor * , uint64_t , int32_t >(&fam::fam_fetch_max) , "fmax1")
+	.def("fam_fetch_max",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_fetch_max) , "fmax2")
+	.def("fam_fetch_max",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_fetch_max) , "fmax3")
+	.def("fam_fetch_max",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_fetch_max) , "fmax4")
+	.def("fam_fetch_max",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_fetch_max) , "fmax5")
+	.def("fam_fetch_max",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_fetch_max) , "fmax6")
+
+	.def("fam_min",py::overload_cast<Fam_Descriptor * , uint64_t , int32_t >(&fam::fam_min) , "min1")
+	.def("fam_min",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_min) , "min2")
+	.def("fam_min",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_min) , "min3")
+	.def("fam_min",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_min) , "min4")
+	.def("fam_min",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_min) , "min5")
+	.def("fam_min",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_min) , "min6")
+
+	.def("fam_fetch_min",py::overload_cast<Fam_Descriptor * , uint64_t , int32_t >(&fam::fam_fetch_min) , "fmin1")
+	.def("fam_fetch_min",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_fetch_min) , "fmin2")
+	.def("fam_fetch_min",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_fetch_min) , "fmin3")
+	.def("fam_fetch_min",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_fetch_min) , "fmin4")
+	.def("fam_fetch_min",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_fetch_min) , "fmin5")
+	.def("fam_fetch_min",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_fetch_min) , "fmin6")
+
 	.def("fam_subtract",py::overload_cast< Fam_Descriptor* , uint64_t , int32_t >(&fam::fam_subtract) , "sub1")
 	.def("fam_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_subtract) , "sub2")
 	.def("fam_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_subtract),"sub3")
 	.def("fam_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_subtract) , "sub4")
 	.def("fam_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_subtract) , "sub5")
 	.def("fam_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_subtract) , "sub6")
+
+	.def("fam_fetch_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , int32_t >(&fam::fam_fetch_subtract) , "fsub1")
+	.def("fam_fetch_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_fetch_subtract) , "fsub2")
+	.def("fam_fetch_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_fetch_subtract), "fsub3")
+	.def("fam_fetch_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_fetch_subtract), "fsub4")
+	.def("fam_fetch_subtract",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_fetch_subtract), "fsub5")
+	.def("fam_fetfam_fetch_subtractch_add",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_fetch_subtract), "fsub6")
+
+	.def("fam_swap",py::overload_cast< Fam_Descriptor* , uint64_t , int32_t >(&fam::fam_swap) , "swap1")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_swap) , "swap2")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t >(&fam::fam_swap),"swap3")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_swap) , "swap4")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_swap) , "swap5")
+	.def("fam_swap",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_swap) , "swap6")
+
+	.def("fam_compare_swap",py::overload_cast< Fam_Descriptor* , uint64_t , int32_t, int32_t >(&fam::fam_compare_swap) , "cswap1")
+	.def("fam_compare_swap",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t, int64_t >(&fam::fam_compare_swap) , "cswap2")
+	.def("fam_compare_swap",py::overload_cast<Fam_Descriptor * , uint64_t , uint32_t, uint32_t >(&fam::fam_compare_swap),"cswap3")
+	.def("fam_compare_swap",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t, uint64_t >(&fam::fam_compare_swap) , "cswap4")
+	.def("fam_compare_swap",py::overload_cast<Fam_Descriptor * , uint64_t , int128_t, int128_t >(&fam::fam_compare_swap) , "cswap5")
+
 	.def("fam_set",py::overload_cast<Fam_Descriptor * , uint64_t , int32_t >(&fam::fam_set) , "set1")
 	.def("fam_set",py::overload_cast<Fam_Descriptor * , uint64_t , int64_t >(&fam::fam_set) , "set2")
 	.def("fam_set",py::overload_cast<Fam_Descriptor * , uint64_t , int128_t >(&fam::fam_set) , "set3")
@@ -54,6 +136,7 @@ PYBIND11_MODULE(example, m) {
 	.def("fam_set",py::overload_cast<Fam_Descriptor * , uint64_t , uint64_t >(&fam::fam_set) , "set5")
 	.def("fam_set",py::overload_cast<Fam_Descriptor * , uint64_t , float >(&fam::fam_set) , "set6")
 	.def("fam_set",py::overload_cast<Fam_Descriptor * , uint64_t , double >(&fam::fam_set) , "set7")
+
 	.def("fam_fetch_int32", &fam::fam_fetch_int32)
 	.def("fam_fetch_int64", &fam::fam_fetch_int64)
 	.def("fam_fetch_int128", &fam::fam_fetch_int128)
@@ -61,12 +144,37 @@ PYBIND11_MODULE(example, m) {
 	.def("fam_fetch_uint64", &fam::fam_fetch_uint64)
 	.def("fam_fetch_float", &fam::fam_fetch_float)
 	.def("fam_fetch_double", &fam::fam_fetch_double)
+
+	//.def("fam_list_options", &fam::fam_list_options)
+
+	.def("fam_lookup_region", &fam::fam_lookup_region)
+
 	.def("fam_destroy_region", &fam::fam_destroy_region)
+	.def("fam_deallocate", &fam::fam_deallocate)
+
+	.def("fam_quiet", &fam::fam_quiet)
+
+	.def("fam_copy", &fam::fam_copy)
+
+	.def("fam_stat",py::overload_cast<Fam_Descriptor * , Fam_Stat * >(&fam::fam_stat) , "stat1")
+	.def("fam_stat",py::overload_cast<Fam_Region_Descriptor * , Fam_Stat * >(&fam::fam_stat) , "stat2")
+
+	.def("fam_lookup", &fam::fam_lookup)
+
+	.def("fam_barrier_all", &fam::fam_barrier_all)
+
+
+
+
 	//.def("fam_create_region", &fam::fam_create_region)
 	//.def("fam_add", &fam::fam_add<Fam_Descriptor*, uint64_t , int32_t>())
 	//.def("fam_create_region", &fam::fam_create_region)
 	//.def("fam_allocate", &fam::fam_allocate)
 	;
+
+
+
+
 
 
 	py::class_<Fam_Descriptor>(m,"Fam_Descriptor")
@@ -78,6 +186,15 @@ PYBIND11_MODULE(example, m) {
 
 	py::class_<Fam_Options>(m,"Fam_Options")
 	.def(py::init<>());
+
+
+	py::class_<Fam_Stat>(m,"Fam_Stat")
+	.def(py::init<>())
+	.def_readwrite("name", &Fam_Stat::name)
+	.def_readwrite("size", &Fam_Stat::size)
+	.def_readwrite("perm", &Fam_Stat::perm)
+	.def_readwrite("key", &Fam_Stat::key)
+	;
 
 	py::enum_<Fam_Redundancy_Level>(m, "Kind")
     	.value("NONE", Fam_Redundancy_Level::NONE)

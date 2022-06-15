@@ -37,11 +37,11 @@ Fam_Options* Test::set_fam_options(){
 
 // ________________________________________________________________________________________________________________
 
-Fam_Region_Descriptor * Test::my_create_region(fam * myFam)
+Fam_Region_Descriptor * Test::my_create_region(fam * myFam , const char * RNAME)
 {
 	Fam_Region_Descriptor * region =NULL;
 		try {
-				region = myFam->fam_create_region("my_Region100", (uint64_t)10000000, 0777 , RAID5);
+				region = myFam->fam_create_region(RNAME, (uint64_t)10000000, 0777 , RAID5);
 			} 
 		catch (Fam_Exception &e) 
 			{
@@ -50,12 +50,12 @@ Fam_Region_Descriptor * Test::my_create_region(fam * myFam)
 		return region ; 
 }
 
-Fam_Descriptor *  Test::my_fam_allocate(fam * myFam,Fam_Region_Descriptor * region)
+Fam_Descriptor *  Test::my_fam_allocate(fam * myFam,Fam_Region_Descriptor * region , const char * INAME)
 {
 	Fam_Descriptor * descriptor=NULL ;
 		try 
 		{
-			descriptor = myFam->fam_allocate("my_item100", (uint64_t)(1 * sizeof(int)),0600, region);
+			descriptor = myFam->fam_allocate(INAME, (uint64_t)(1 * sizeof(int)),0600, region);
 		}
 		catch (Fam_Exception &e) 
 		{
