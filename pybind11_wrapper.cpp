@@ -1,4 +1,3 @@
-// Pybind11 wrapper for C++
 #include <pybind11/pybind11.h>
 #include "test.h"
 
@@ -201,9 +200,73 @@ PYBIND11_MODULE(example, m) {
     	.value("RAID1", Fam_Redundancy_Level::RAID1)
 	.value("RAID5", Fam_Redundancy_Level::RAID5)
     	.export_values();
+	
+	py::enum_<Fam_Error>(m, "Kindly")
+	.value("FAM_NO_ERROR", Fam_Error::FAM_NO_ERROR)
+	.value("FAM_ERR_UNKNOWN", Fam_Error::FAM_ERR_UNKNOWN)
+	.value("FAM_ERR_NOPERM", Fam_Error::FAM_ERR_NOPERM)
+	.value("FAM_ERR_TIMEOUT", Fam_Error::FAM_ERR_TIMEOUT)
+	.value("FAM_ERR_INVALID", Fam_Error::FAM_ERR_INVALID)
+	.value("FAM_ERR_LIBFABRIC", Fam_Error::FAM_ERR_LIBFABRIC)
+	.value("FAM_ERR_SHM", Fam_Error::FAM_ERR_SHM)
+	.value("FAM_ERR_NOT_CREATED", Fam_Error::FAM_ERR_NOT_CREATED)
+	.value("FAM_ERR_NOTFOUND", Fam_Error::FAM_ERR_NOTFOUND)
+	.value("FAM_ERR_ALREADYEXIST", Fam_Error::FAM_ERR_ALREADYEXIST)
+	.value("FAM_ERR_ALLOCATOR", Fam_Error::FAM_ERR_ALLOCATOR)
+	.value("FAM_ERR_RPC", Fam_Error::FAM_ERR_RPC)
+	.value("FAM_ERR_PMI", Fam_Error::FAM_ERR_PMI)
+	.value("FAM_ERR_OUTOFRANGE", Fam_Error::FAM_ERR_OUTOFRANGE)
+	.value("FAM_ERR_NULLPTR", Fam_Error::FAM_ERR_NULLPTR)
+	.value("FAM_ERR_UNIMPL", Fam_Error::FAM_ERR_UNIMPL)
+	.value("FAM_ERR_RESOURCE", Fam_Error::FAM_ERR_RESOURCE)
+	.value("FAM_ERR_INVALIDOP", Fam_Error::FAM_ERR_INVALIDOP)
+	.value("FAM_ERR_RPC_CLIENT_NOTFOUND", Fam_Error::FAM_ERR_RPC_CLIENT_NOTFOUND)
+	.value("FAM_ERR_MEMSERV_LIST_EMPTY", Fam_Error::FAM_ERR_MEMSERV_LIST_EMPTY)
+	.value("FAM_ERR_METADATA", Fam_Error::FAM_ERR_METADATA)
+	.value("FAM_ERR_MEMORY", Fam_Error::FAM_ERR_MEMORY)
+	.value("FAM_ERR_NAME_TOO_LONG", Fam_Error::FAM_ERR_NAME_TOO_LONG)
+	.value("FAM_ERR_ATL_QUEUE_FULL", Fam_Error::FAM_ERR_ATL_QUEUE_FULL)
+	.value("FAM_ERR_ATL_QUEUE_INSERT", Fam_Error::FAM_ERR_ATL_QUEUE_INSERT)
+	.value("FAM_ERR_ATL_NOT_ENABLED", Fam_Error::FAM_ERR_ATL_NOT_ENABLED)
+	.value("FAM_ERR_ATL", Fam_Error::FAM_ERR_ATL)
+	.export_values();
+	//py::class_<Fam_Exception>(m, "Fam_Exception")
+	
+	//.def(py::init<>())
+	//.def(py::init<const std::string &,Fam_Error >())
+	//.def(py::init<const char*>())
+	//.def("fam_error",&Fam_Exception::fam_error,"FUnction errors")
+	//.def(py::init<Fam_Error  , const char *>())
+	//.def(py::init<const Fam_Exception *>())
+	//.def("fam_error_msg",&Fam_Exception::fam_error_msg,"Function  Description")
+	//.def("what",&Fam_Exception::what,"Function  Description");
+	
+
+
+ 
+//static py::exception<Fam_Exception> ex(m, "Fam_Exception");
+    //py::register_exception_translator([](std::exception_ptr p) {
+        //try {
+            //if (p) {
+             //   std::rethrow_exception(p);
+            //}
+        //} catch (const Fam_Exception &e) {
+            // Set MyException as the active python error
+		
+          //  ex(e.what());
+     //   }
+   // });
+
+
+
+	//py::register_exception<>(m, "PyExp");
+	    
+
+	   
+
+
+
 
 
 
 }
-
-
