@@ -198,7 +198,7 @@ try:
 	#FAM FETCH MAX_________________________________________
 
 	res = famObject.fam_fetch_max(d, 0, 10)
-
+	
 	print(res)
 
 	#_____________________________________________________
@@ -399,8 +399,9 @@ try:
 
 
 except Exception as e:
-	print("SOMETHING WENT WRONG:",  e)
-	print()
+	 
+	 
+	 print(e)
 
 finally:
 	famObject.fam_destroy_region(r)

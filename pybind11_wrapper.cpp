@@ -9,7 +9,23 @@ using namespace std;
 using namespace openfam;
 
 namespace py = pybind11;
-
+/**
+template <typename Fam_Exception>
+exception<Fam_Exception> &register_exception(handle scope,
+                                            const char *name,
+                                            PyObject *base = PyExc_Exception) {
+    auto &ex = detail::get_exception_object<Fam_Exception>();
+    ex = exception<Fam_Exception>(scope, name, base);
+    register_exception_translator([](std::exception_ptr p) {
+        if (!p) return;
+        try {
+            std::rethrow_exception(p);
+        } catch (const Fam_Exception &e) {
+            detail::get_exception_object<Fam_Exception>()(e.what());
+        }
+    });
+    return ex;
+**/
 PYBIND11_MODULE(example, m) {
 
 
@@ -230,36 +246,48 @@ PYBIND11_MODULE(example, m) {
 	.value("FAM_ERR_ATL_NOT_ENABLED", Fam_Error::FAM_ERR_ATL_NOT_ENABLED)
 	.value("FAM_ERR_ATL", Fam_Error::FAM_ERR_ATL)
 	.export_values();
-	//py::class_<Fam_Exception>(m, "Fam_Exception")
+
+	py::class_<Fam_Exception>(m, "Fam_Exception", py::dynamic_attr())
 	
-	//.def(py::init<>())
-	//.def(py::init<const std::string &,Fam_Error >())
-	//.def(py::init<const char*>())
-	//.def("fam_error",&Fam_Exception::fam_error,"FUnction errors")
+	.def(py::init<>())
+	.def(py::init<const char *>())
+	.def(py::init< Fam_Error ,const char * >())
+	.def(py::init<const Fam_Exception &>())
+	.def("fam_error",&Fam_Exception::fam_error,"FUnction errors")
 	//.def(py::init<Fam_Error  , const char *>())
 	//.def(py::init<const Fam_Exception *>())
-	//.def("fam_error_msg",&Fam_Exception::fam_error_msg,"Function  Description")
-	//.def("what",&Fam_Exception::what,"Function  Description");
+	.def("fam_error_msg",&Fam_Exception::fam_error_msg,"Function  Description")
+	.def("what",&Fam_Exception::what,"Function  Description");
 	
 
 
- 
-//static py::exception<Fam_Exception> ex(m, "Fam_Exception");
-    //py::register_exception_translator([](std::exception_ptr p) {
-        //try {
-            //if (p) {
-             //   std::rethrow_exception(p);
-            //}
-        //} catch (const Fam_Exception &e) {
+
+
+/**
+ * Registers a Python exception in `m` of the given `name` and installs an exception translator to
+ * translate the C++ exception to the created Python exception using the exceptions what() method.
+ * This is intended for simple exception translations; for more complex translation, register the
+ * exception object and translator directly.
+ */
+
+
+
+    //static py::exception<Fam_Exception> ex(m, "Fam_Exception");
+
+    py::register_exception_translator([](std::exception_ptr p) {
+        try {
+            if (p) {
+                std::rethrow_exception(p);
+            }
+        } catch (const Fam_Exception &e) {
             // Set MyException as the active python error
-		
-          //  ex(e.what());
-     //   }
-   // });
+            auto err = py::cast(e);
+        auto errType = err.get_type().ptr();
+        PyErr_SetObject(errType, err.ptr());
+        }
+    });
 
-
-
-	//py::register_exception<>(m, "PyExp");
+	
 	    
 
 	   
